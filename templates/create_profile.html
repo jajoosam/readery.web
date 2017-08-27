@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block body%}
+<div class="container ">
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-7 form-box">
+			<h1>Create your Profile</h1>
+			<br>
+			{% if msg %}
+			<div class="alert alert-danger" role="alert">{{msg}}</div>
+			{% endif %}
+
+			<form class="" method="POST" action="/profile/update/" >
+			{% csrf_token %}
+      <p> I know it's a long form, Let's just do it. </p>
+      <div class="form-group">
+				<label>About</label>
+				<input name="about" type="text" class="form-control form-control-sm">
+        <small>A short intro about yourself, What do you do? Or something that adds credibility.</small>
+			</div>
+      <div class="form-group">
+				<label>Preferred Genres</label>
+				<input name="skills" type="text" class="form-control form-control-sm" placeholder="Ex: SciFi, Mystery, Horror etc">
+        <small>What genres do you like reading? Separate each genre with a comma</small>
+      </div>
+			<button type="submit" class="btn btn-primary login-theme-btn">Create</button>
+		</form>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+</div>
+</div>
+{% endblock %}

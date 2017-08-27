@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+  <div class="row">
+  <div class="col-md-7">
+    <div class="card" style="width:100%">
+      <div class="card-body">
+        <h2 class="card-title">{{thisuser.first_name}} {{thisuser.last_name}}</h2>
+        <br>
+        <hr>
+        <p style="margin-bottom:5px; font-size:18px;"><b>About</b></p>
+        <p>{{thisuser.profile.about}}</p>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <h5>Books</h5>
+    <hr>
+    {% for project in projects %}
+    <div style="width:100%;">
+        <a href="https://libert.herokuapp.com/{{project.title}}" style=" font-size:18px;"><b>{{project.title}}</b></a>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="col-md-5">
+    {% if thisuser == request.user %}
+    <a class="btn btn-outline-danger btn-sm" href="/add/book/">Add Book</a>
+    <form action="/post/create/" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <br>
+        <label>What's going on?</label>
+        <div class="form-group">
+          <select name="project" class="form-control form-control-sm">
+            {% for project in projects %}
+            <option value="{{project.id}}">{{project.title}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <textarea name="body" class="form-control" rows="3" style="font-size:13px;"></textarea>
+        <br>
+        <div class="set-right">
+          <button class="btn btn-primary btn-sm" type="submit" name="button">Post</button>
+        </div>
+      </div>
+    </form>
+    {% endif %}
+    <hr>
+    <h4>Posts</h4>
+    <hr>
+    {% for post in posts %}
+    <div style="width:100%;">
+        <p style="margin-bottom:5px;"><b>Project: {{post.project.title}}</b></p>
+        <p style="margin-bottom:5px; font-size:12px">{{post.timestamp}}</p>
+        <p style="margin-bottom:5px;">{{post.body}}</p>
+        <hr>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+</div>
+{% endblock %}

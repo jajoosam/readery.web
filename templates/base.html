@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Readery Web</title>
+    <link rel="icon" type="image/png" href="{% static 'waffle.png' %}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Khula" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/x-icon" href="https://cdn.glitch.com/309c5cca-6250-4906-a738-5feca93112a4%2Ffavicon.ico?1503062906990" />
+    <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Raw CSS has been added here as Amazon S3 was not set up for serving files. -->
+    <style media="screen" type="text/css">
+
+    body {
+      font-family: "Open Sans", sans-serif;
+      font-size: 16px;
+    }
+
+    h1 {
+      font-size: 32px;
+    }
+
+    .home h3 {
+      font-size: 20px;
+      font-family: "Khula", sans-serif;
+      line-height: 1.5;
+    }
+
+    .navbar-theme {
+        position: fixed;
+        z-index: 100;
+        width: 100%;
+        background-color: #444444;
+        border-radius: 0;
+        border: transparent;
+        height: 60px;
+        padding-bottom: 10px;
+        margin-bottom: 50px;
+    }
+
+    .body-container {
+      padding-top: 80px;
+    }
+
+    .set-right {
+        text-align: right;
+    }
+
+    .form-box {
+        border: 1px solid rgba(65, 97, 249, 0.3);
+        border-radius: 5px;
+        width:600px;
+        min-height: 40%;
+        padding: 50px;
+        padding-top: 30px;
+        margin-top: 20px;
+        margin-bottom: 100px;
+    }
+    </style>
+</head>
+
+<body>
+      <nav class="navbar navbar-expand-sm navbar-dark   pull-xs-right" style="background-color: #444444; font-size:14px;">
+        <div class="container">
+        <a class="navbar-brand" href="/">readery.web</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav ml-auto" style="position:relative; text-align:right;">
+            {% if user.is_authenticated %}
+            <li class="nav-item ">
+              <a class="nav-link" href="/feed/progress/">Progress Feed</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="/members/directory/">Member Directory</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/{{request.user}}">My Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/accounts/logout/">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/accounts/register/">Sign up</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/accounts/login/">Login</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+
+      </div>
+      </nav>
+
+    <div class="body-container">
+        {% block body %} {% endblock %}
+    </div>
+</body>
+</html>
