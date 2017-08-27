@@ -1,4 +1,4 @@
-# Feathrd Club 
+# Readery Web
 
 To run the application, set up a virtualenv and move the project folder into the environment folder. 
 
